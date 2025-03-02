@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_with_app_write/controllers/auth_controller.dart';
 import 'package:todo_with_app_write/widgets/primary_button.dart';
 
 import 'login_page.dart';
@@ -9,6 +10,11 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _nameController = TextEditingController();
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+
+    final AuthController authController = Get.put(AuthController());
     return Scaffold(
       appBar: AppBar(
         title: const Text("Create an account"),
@@ -18,7 +24,7 @@ class SignupPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-           const SizedBox(height: 40),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -33,36 +39,43 @@ class SignupPage extends StatelessWidget {
                 )
               ],
             ),
-           const SizedBox(height: 40),
+            const SizedBox(height: 40),
             TextFormField(
-              decoration:  InputDecoration(
-                
-                hintText: "Full Name",
-                prefixIcon: Icon(Icons.alternate_email)
-              ),
+              controller: _nameController,
+              decoration: const InputDecoration(
+                  hintText: "Full Name", prefixIcon: Icon(Icons.person)),
             ),
             const SizedBox(height: 20),
             TextFormField(
+              controller: _emailController,
               decoration: const InputDecoration(
-                hintText: "Email id",
-                prefixIcon: Icon(Icons.alternate_email)
-              ),
+                  hintText: "Email id",
+                  prefixIcon: Icon(Icons.alternate_email)),
             ),
             const SizedBox(height: 20),
             TextFormField(
+              controller: _passwordController,
               decoration: const InputDecoration(
-                hintText: "Password",
-                prefixIcon: Icon(Icons.password)
-              ),
+                  hintText: "Password", prefixIcon: Icon(Icons.password)),
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PrimaryButton(
-                    text: "Create accout",
-                    onTap: () {},
-                    bgColor: Theme.of(context).colorScheme.onSurface)
+                Obx(
+                  () => authController.isLoading.value
+                      ? CircularProgressIndicator()
+                      : PrimaryButton(
+                          text: "Create accout",
+                          onTap: () {
+                            authController.createUserWithEmailPassword(
+                              _nameController.text,
+                              _emailController.text,
+                              _passwordController.text,
+                            );
+                          },
+                          bgColor: Theme.of(context).colorScheme.onSurface),
+                )
               ],
             ),
             const SizedBox(height: 20),
@@ -70,17 +83,21 @@ class SignupPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              const Text("Already have an account? "),
-              InkWell(
-                onTap: (){
+                const Text("Already have an account? "),
+                InkWell(
+                  onTap: () {
                     Get.to(const LoginPage());
-                },
-                child: Text("Login",style: TextStyle(
-                  fontSize: 18,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer
-                ),),
-              )
-            ],)
+                  },
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color:
+                            Theme.of(context).colorScheme.onPrimaryContainer),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),

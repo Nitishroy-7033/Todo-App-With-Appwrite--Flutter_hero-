@@ -1,9 +1,7 @@
-import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_with_app_write/core/app_theme.dart';
 import 'package:todo_with_app_write/pages/auth/login_page.dart';
-import 'package:todo_with_app_write/pages/home_page.dart';
 import 'package:todo_with_app_write/services/app_write_service.dart';
 
 void main() {
