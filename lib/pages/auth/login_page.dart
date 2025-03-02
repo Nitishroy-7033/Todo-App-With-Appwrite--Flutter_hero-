@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_with_app_write/controllers/auth_controller.dart';
 import 'package:todo_with_app_write/pages/auth/singup_page.dart';
 import 'package:todo_with_app_write/widgets/primary_button.dart';
 
@@ -8,7 +9,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    AuthController authController = Get.put(AuthController());
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text("Login Page"),
@@ -35,12 +38,14 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 40),
             TextFormField(
+              controller: _emailController,
               decoration: const InputDecoration(
                   hintText: "Email id",
                   prefixIcon: Icon(Icons.alternate_email)),
             ),
             const SizedBox(height: 20),
             TextFormField(
+              controller: _passwordController,
               decoration: const InputDecoration(
                   hintText: "Password", prefixIcon: Icon(Icons.password)),
             ),
@@ -48,10 +53,19 @@ class LoginPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PrimaryButton(
-                    text: "Login",
-                    onTap: () {},
-                    bgColor: Theme.of(context).colorScheme.onSurface)
+                Obx(
+                  () => authController.isLoading.value
+                      ? CircularProgressIndicator()
+                      : PrimaryButton(
+                          text: "Login",
+                          onTap: () {
+                            authController.loginWithEmailAndPassword(
+                              _emailController.text,
+                              _passwordController.text,
+                            );
+                          },
+                          bgColor: Theme.of(context).colorScheme.onSurface),
+                )
               ],
             ),
             SizedBox(height: 20),

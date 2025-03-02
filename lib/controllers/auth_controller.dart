@@ -5,6 +5,7 @@ import 'package:todo_with_app_write/services/app_write_service.dart';
 class AuthController extends GetxController {
   final AppWriteService appWriteService = AppWriteService();
   RxBool isLoading = false.obs;
+
   Future<void> createUserWithEmailPassword(
       String name, String email, String password) async {
     try {
@@ -18,11 +19,30 @@ class AuthController extends GetxController {
         password: password,
       );
       Get.rawSnackbar(message: "✅ User create successfully");
-       print("✅ User Created");
+      print("✅ User Created");
     } catch (ex) {
       Get.rawSnackbar(message: ex.toString());
-       print("❌ Error while creating user");
+      print("❌ Error while creating user");
     } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> loginWithEmailAndPassword(String email, String password) async {
+    try {
+      isLoading.value = true;
+      print("✅ User going to login....");
+      await appWriteService.account.createEmailPasswordSession(
+        email: email,
+        password: password,
+      );
+       Get.rawSnackbar(message: "✅ Login Successful");
+      print("✅ Login Successful");
+    } catch (ex) {
+      Get.rawSnackbar(message: ex.toString());
+      print("❌ Error While login ");
+    }
+    finally{
       isLoading.value = false;
     }
   }
