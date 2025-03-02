@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      enableLog: true,
       title: 'Todo app with Appwrite',
       theme: lightTheme,
       debugShowCheckedModeBanner: false,

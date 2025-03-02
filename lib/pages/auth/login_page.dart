@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_with_app_write/controllers/auth_controller.dart';
 import 'package:todo_with_app_write/pages/auth/singup_page.dart';
+import 'package:todo_with_app_write/widgets/footer_credit.dart';
 import 'package:todo_with_app_write/widgets/primary_button.dart';
 
 class LoginPage extends StatelessWidget {
@@ -13,13 +14,13 @@ class LoginPage extends StatelessWidget {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
     return Scaffold(
+      bottomSheet: const FooterCredit(),
       appBar: AppBar(
         title: Text("Login Page"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: ListView(
           children: [
             SizedBox(height: 40),
             Row(
@@ -72,29 +73,34 @@ class LoginPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              ElevatedButton(
-              onPressed: () {
-                authController.getLoginUserDetails();
-              },
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
-                foregroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface),
-              ),
-              child: Text("Get User details"),
+                ElevatedButton(
+                  onPressed: () {
+                    authController.getLoginUserDetails();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                        Theme.of(context).colorScheme.secondary),
+                    foregroundColor: WidgetStateProperty.all(
+                        Theme.of(context).colorScheme.onSurface),
+                  ),
+                  child: const Text("Get User details"),
+                ),
+                SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    authController.logOutUser();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                        Theme.of(context).colorScheme.secondary),
+                    foregroundColor: WidgetStateProperty.all(
+                        Theme.of(context).colorScheme.onSurface),
+                  ),
+                  child: const Text("Logout"),
+                ),
+              ],
             ),
-            SizedBox(width: 20),
-            ElevatedButton(
-              onPressed: () {
-                authController.logOutUser();
-              },
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
-                foregroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface),
-              ),
-              child: Text("Logout"),
-            ),
-            ],),
-            Spacer(),
+            SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

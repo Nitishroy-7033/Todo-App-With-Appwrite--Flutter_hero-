@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:todo_with_app_write/controllers/auth_controller.dart';
 import 'package:todo_with_app_write/widgets/primary_button.dart';
 
+import '../../widgets/footer_credit.dart';
 import 'login_page.dart';
 
 class SignupPage extends StatelessWidget {
@@ -19,6 +20,7 @@ class SignupPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Create an account"),
       ),
+        bottomSheet: const FooterCredit(),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
