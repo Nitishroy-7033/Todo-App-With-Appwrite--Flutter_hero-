@@ -35,7 +35,8 @@ class SignupPage extends StatelessWidget {
             ),
            const SizedBox(height: 40),
             TextFormField(
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
+                
                 hintText: "Full Name",
                 prefixIcon: Icon(Icons.alternate_email)
               ),
@@ -65,6 +66,7 @@ class SignupPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

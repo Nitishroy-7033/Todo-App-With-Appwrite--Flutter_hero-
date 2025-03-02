@@ -54,6 +54,7 @@ class LoginPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
