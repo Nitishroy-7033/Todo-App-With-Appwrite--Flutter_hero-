@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todo_with_app_write/controllers/auth_controller.dart';
 import 'package:todo_with_app_write/widgets/footer_credit.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,13 +8,26 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        bottomSheet: const FooterCredit(),
+    AuthController authController = Get.put(AuthController());
+    return Scaffold(
+      bottomSheet: const FooterCredit(),
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                authController.logOutUser();
+              },
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ))
+        ],
         centerTitle: true,
         title: Text("Homepage"),
       ),
-      body: Column(children: [],),
+      body: Column(
+        children: [],
+      ),
     );
   }
 }
