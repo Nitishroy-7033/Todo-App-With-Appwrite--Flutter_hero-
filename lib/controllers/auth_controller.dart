@@ -1,4 +1,5 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:get/get.dart';
 import 'package:todo_with_app_write/services/app_write_service.dart';
 
@@ -46,4 +47,31 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  Future<void> getLoginUserDetails() async {
+    try{
+      User user = await appWriteService.account.get();
+      print("✅ Login User Found");
+      print("User Name :${user.name}");
+      print("Email id :${user.email}");
+      print("User id :${user.$id}");
+    }
+    catch(ex)
+    {
+      print("❌ User Not Login");
+    }
+  }
+
+  Future<void> logOutUser()async {
+    try{
+      await appWriteService.account.deleteSession(sessionId: 'current');
+      print("✅ User Logout");
+    }
+    catch(ex)
+    {
+      print("❌ Error while logout");
+    }
+  }
+
+  
 }

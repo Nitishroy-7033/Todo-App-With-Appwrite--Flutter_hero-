@@ -69,6 +69,31 @@ class LoginPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              ElevatedButton(
+              onPressed: () {
+                authController.getLoginUserDetails();
+              },
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
+                foregroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface),
+              ),
+              child: Text("Get User details"),
+            ),
+            SizedBox(width: 20),
+            ElevatedButton(
+              onPressed: () {
+                authController.logOutUser();
+              },
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
+                foregroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface),
+              ),
+              child: Text("Logout"),
+            ),
+            ],),
             Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
