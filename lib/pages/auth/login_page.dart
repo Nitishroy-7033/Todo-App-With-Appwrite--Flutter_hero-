@@ -100,6 +100,24 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    authController.loginWithGoogle();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                        Theme.of(context).colorScheme.primary),
+                    foregroundColor: WidgetStateProperty.all(
+                        Theme.of(context).colorScheme.onPrimaryContainer),
+                  ),
+                  child: const Text("Login with Google"),
+                ),
+               
+              ],
+            ),
             SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
