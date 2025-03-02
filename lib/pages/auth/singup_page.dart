@@ -11,13 +11,29 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create an account"),
+        title: const Text("Create an account"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+           const SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  radius: 80,
+                  child: Icon(
+                    Icons.person,
+                    color: Theme.of(context).colorScheme.surface,
+                    size: 100,
+                  ),
+                )
+              ],
+            ),
+           const SizedBox(height: 40),
             TextFormField(
               decoration: const InputDecoration(
                 hintText: "Full Name",
@@ -48,14 +64,14 @@ class SignupPage extends StatelessWidget {
                     bgColor: Theme.of(context).colorScheme.onSurface)
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text("Already have an account? "),
+              const Text("Already have an account? "),
               InkWell(
                 onTap: (){
-                    Get.to(LoginPage());
+                    Get.to(const LoginPage());
                 },
                 child: Text("Login",style: TextStyle(
                   fontSize: 18,
